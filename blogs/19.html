@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>js垃圾回收机制、性能优化、内存管理 | 星火的博客</title>
+    <meta name="generator" content="VuePress 1.9.8">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/blogs/assets/css/0.styles.64277ae4.css" as="style"><link rel="preload" href="/blogs/assets/js/app.0ff13cd8.js" as="script"><link rel="preload" href="/blogs/assets/js/3.25154597.js" as="script"><link rel="preload" href="/blogs/assets/js/1.2b2bc26d.js" as="script"><link rel="preload" href="/blogs/assets/js/21.faeae888.js" as="script"><link rel="prefetch" href="/blogs/assets/js/10.6a7508d8.js"><link rel="prefetch" href="/blogs/assets/js/11.0f3b060c.js"><link rel="prefetch" href="/blogs/assets/js/12.a18f01ff.js"><link rel="prefetch" href="/blogs/assets/js/13.88fe89aa.js"><link rel="prefetch" href="/blogs/assets/js/14.95141c56.js"><link rel="prefetch" href="/blogs/assets/js/15.3ec1a69e.js"><link rel="prefetch" href="/blogs/assets/js/16.bf10ba71.js"><link rel="prefetch" href="/blogs/assets/js/17.1b439980.js"><link rel="prefetch" href="/blogs/assets/js/18.b0291ccb.js"><link rel="prefetch" href="/blogs/assets/js/19.e5514aca.js"><link rel="prefetch" href="/blogs/assets/js/20.555574a0.js"><link rel="prefetch" href="/blogs/assets/js/22.96e8a470.js"><link rel="prefetch" href="/blogs/assets/js/23.15dbab4e.js"><link rel="prefetch" href="/blogs/assets/js/24.11c4ca38.js"><link rel="prefetch" href="/blogs/assets/js/25.575d54f4.js"><link rel="prefetch" href="/blogs/assets/js/26.9b8768df.js"><link rel="prefetch" href="/blogs/assets/js/27.0824035f.js"><link rel="prefetch" href="/blogs/assets/js/28.bc1b44a4.js"><link rel="prefetch" href="/blogs/assets/js/29.067f8215.js"><link rel="prefetch" href="/blogs/assets/js/30.b8c09885.js"><link rel="prefetch" href="/blogs/assets/js/31.6447086b.js"><link rel="prefetch" href="/blogs/assets/js/32.3acae25e.js"><link rel="prefetch" href="/blogs/assets/js/4.b2561910.js"><link rel="prefetch" href="/blogs/assets/js/5.953a0682.js"><link rel="prefetch" href="/blogs/assets/js/6.880c84a4.js"><link rel="prefetch" href="/blogs/assets/js/7.e3b042e0.js"><link rel="prefetch" href="/blogs/assets/js/8.34ee1e83.js"><link rel="prefetch" href="/blogs/assets/js/9.41f7eeed.js">
+    <link rel="stylesheet" href="/blogs/assets/css/0.styles.64277ae4.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>星火的博客</h3> <p class="description" data-v-59e6cb88>Just playing around</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>星火</span>
+          
+        <!---->
+        2023
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blogs/" class="home-link router-link-active"><img src="/blogs/doge.png" alt="星火的博客" class="logo"> <span class="site-name">星火的博客</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blogs/" class="nav-link"><i class="undefined"></i>
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      博客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blogs/categories/通用编程/" class="nav-link"><i class="undefined"></i>
+  通用编程
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/markdown/" class="nav-link"><i class="undefined"></i>
+  markdown
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/源码/" class="nav-link"><i class="undefined"></i>
+  源码
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/小程序/" class="nav-link"><i class="undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/js/" class="nav-link"><i class="undefined"></i>
+  js
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/读书/" class="nav-link"><i class="undefined"></i>
+  读书
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      星火 的博客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://baidu.com" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  百度
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://juejin.cn/user/233526039432445" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  掘金
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://github.com/Xusssyyy" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div><div class="nav-item"><a href="/blogs/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/blogs/doge.png" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    星火
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>21</h3> <h6 data-v-1fad0c41>Articles</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>23</h3> <h6 data-v-1fad0c41>Tags</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/blogs/" class="nav-link"><i class="undefined"></i>
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      博客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blogs/categories/通用编程/" class="nav-link"><i class="undefined"></i>
+  通用编程
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/markdown/" class="nav-link"><i class="undefined"></i>
+  markdown
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/源码/" class="nav-link"><i class="undefined"></i>
+  源码
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/小程序/" class="nav-link"><i class="undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/js/" class="nav-link"><i class="undefined"></i>
+  js
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/读书/" class="nav-link"><i class="undefined"></i>
+  读书
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      星火 的博客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://baidu.com" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  百度
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://juejin.cn/user/233526039432445" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  掘金
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://github.com/Xusssyyy" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div><div class="nav-item"><a href="/blogs/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>js垃圾回收机制、性能优化、内存管理</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>星火</span>
+          
+        <!---->
+        2023
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">js垃圾回收机制、性能优化、内存管理</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>星火</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>5/12/2023</span></i> <!----> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>js</span><span class="tag-item" data-v-8a445198>红宝书</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="简介"><a href="#简介" class="header-anchor">#</a> 简介</h1> <p>读红宝书js垃圾回收机制和性能优化加内存管理三部分后个人理解。</p> <h2 id="js垃圾回收"><a href="#js垃圾回收" class="header-anchor">#</a> js垃圾回收</h2> <p>js垃圾回收一般是两种：标记清除、引用计数。<br>
+标记清除是在一个变量进入上下文的时候对他做出标记知道他进入出的时候取消标记。实现的方式可以不同，但是大概意思是用标记区分在上下文和不再上下文的变量。一种实现方式是开始的时候就给所有的变量标记，然后只要有变量进入上下文就取消他身上的标记，这样没标记的都会在下一轮被清理。<br>
+引用计数是当一个变量被初始化或者被其他变量引用的时候计数加一，如果变量被其他的覆盖了计数减一，但是有个问题就是循环引用，对象A属性指向对象B，对象B属性指向对象A那么他们就相互引用计数为2不会清除。(IE8以及更早版本的IE浏览器DOM，BOM对象使用C++语言实现的，他们都是引用计数的形式，所以会出现上述的循环引用的情况，解决办法就是手动在后面赋值为null)</p> <h2 id="性能"><a href="#性能" class="header-anchor">#</a> 性能</h2> <p>垃圾回收程序是周期性运行的，如果内存中分配了较多的变量则有可能造成性能损失，所以垃圾回收的时间调度很重要，一个原则是不论什么时候收集垃圾都要让他能够较快的结束。<br>
+现代垃圾回收程序一般都是根据js运行时环境来探测何时运行的。比如IE7js垃圾回收机制是这样的，他会动态改变分配变量，字面量或数组槽位等会触发垃圾回收机制的阈值，如果垃圾回收程序回收的内存还达不到已分配的15%就让这个阈值翻倍(我的理解是你回收一次的内存才不到分配的15%就说明分配的内存很够用不用这么频繁的触发垃圾回收所以要提高阈值)，当某次回收的内存占到85%则阈值要回复到默认值，(说明要快一点回收了)</p> <h2 id="内存管理"><a href="#内存管理" class="header-anchor">#</a> 内存管理</h2> <p>优化内存的目的是为了避免运行大量js的网页耗尽系统内存而导致操作系统崩溃，这个内存限制不仅影响变量分配，也影响调用栈以及能够同时在一个线程中执行的语句数量。将内存占用尽量小可以让页面性能够好。<br>
+优化的最佳手段就是只保存必要的数据，如果数据不是必要了，就要设置为null从而释放。<br>
+还有两种具体的方式提升性能：</p> <h3 id="_1-通过const和let声明提升性能"><a href="#_1-通过const和let声明提升性能" class="header-anchor">#</a> 1.通过const和let声明提升性能</h3> <p>因为let、const都是块级作用域，而我们的优化的目的就是为了让垃圾的内存尽可能快的回收，而块级作用域通常会比函数作用域更早终止。</p> <h3 id="_2-隐藏类和删除操作"><a href="#_2-隐藏类和删除操作" class="header-anchor">#</a> 2.隐藏类和删除操作</h3> <p>如chorme浏览器v8引擎，将解释后的js代码编译为实际的机器码时会利用隐藏类来达到复用的目的。<br>
+比如</p> <div class="language- extra-class"><pre class="language-text"><code>function Article(){
+    this.title = 'lllllll'
+}
+let a1 = new Article()
+let a2 = new Article()
+</code></pre></div><p>这两个实例共享同一个构造函数和原型，这样的话其实就是有一样的隐藏类。但是假如上面的代码创建后，我又给a1加了个属性，那么他们就不会在共享一个隐藏类了，同理使用delete a1.some 删除a1的some属性后，他们也是不具有同样的隐藏类了，最好的办法就是都有some属性然后给a2的some设置为null。</p> <h2 id="内存泄漏"><a href="#内存泄漏" class="header-anchor">#</a> 内存泄漏</h2> <p>内存泄漏一般由一下几种情况引起。</p> <h3 id="未声明变量就使用"><a href="#未声明变量就使用" class="header-anchor">#</a> 未声明变量就使用</h3> <div class="language- extra-class"><pre class="language-text"><code>function setName(){
+    name = 'Jack'
+}
+</code></pre></div><p>这样name就挂到window了，window不消失name不消失</p> <h3 id="定时器形成了闭包"><a href="#定时器形成了闭包" class="header-anchor">#</a> 定时器形成了闭包</h3> <div class="language- extra-class"><pre class="language-text"><code>let name = 'Jack'
+setInterval(()=&gt;{
+    console.log(name)
+},100)
+</code></pre></div><p>定时器内部引用了外面的jack，只要定时器一直运行，name就一直占用内存。</p> <h3 id="闭包泄露内存"><a href="#闭包泄露内存" class="header-anchor">#</a> 闭包泄露内存</h3> <div class="language- extra-class"><pre class="language-text"><code>let outer = function() { 
+ let name = 'Jake'
+ return function() { 
+ return name
+ }
+}
+</code></pre></div><p>如果里面的函数存在就不会清理name，因为闭包一直在引用它</p> <h2 id="静态分配和对象池"><a href="#静态分配和对象池" class="header-anchor">#</a> 静态分配和对象池</h2> <p>避免多余的垃圾回收是提升js性能的关键。要知道浏览器决定何时运行垃圾回收程序的一个标准就是对象的更替速度，加入有很多的对象被初始化后一下子超出作用域，那么浏览器一看哎呀小子搞这个东西，浏览器直接就是加大火力调用垃圾回收这样就会影响性能，比如这样的计算二位矢量加法的函数</p> <div class="language- extra-class"><pre class="language-text"><code>function addVector(a,b){
+    let resultant = new Vector(); 
+    resultant.x = a.x + b.x; 
+    resultant.y = a.y + b.y; 
+    return resultant; 
+}
+</code></pre></div><p>假如这个函数被频繁的调用，比如一个for循环我调用了几十次，那么浏览器一看哎那么可要触发回收机制了，你就卡着去吧。解决这个问题的方法是，提前在外面我创建一个对象，然后我在函数里面改属性就好了。<br>
+对象池就是针对这种情景的解决方案。在初始化的某一时刻，可以创建一个对象池，用来管理一组可回收的对象。
+应用程序可以向这个对象池请求一个对象、设置其属性、用它，然后在操作完成后再把它还给对象池。由于没发生对象初始化，垃圾回收探测就不会发现有对象更替，因此垃圾回收程序就不会那么频繁地运行。</p> <div class="language- extra-class"><pre class="language-text"><code>let v1 = vectorPool.allocate()
+let v2 = vectorPool.allocate()
+let v3 = vectorPool.allocate()
+v1.x = 10
+v1.y = 5
+v2.x = -3
+v2.y = -6
+addVector(v1, v2, v3)
+console.log([v3.x, v3.y]); // [7, -1] 
+vectorPool.free(v1)
+vectorPool.free(v2)
+vectorPool.free(v3) 
+// 如果对象有属性引用了其他对象
+// 则这里也需要把这些属性设置为 null 
+v1 = null
+v2 = null
+v3 = null
+</code></pre></div><p>对象池的结构，数组是个比较好的选择，但是js数组大小动态可变一般来说引擎会删除大小为100的数组再创建大小为200的数组，垃圾回收程序会识别删除这个动作，他就会再来执行一次回收，所以说要事先想好这个对象池要多大，初始化的时候就尽量创建一个够用的数组。</p></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/19.html#js垃圾回收" class="sidebar-link reco-side-js垃圾回收" data-v-b57cc07c>js垃圾回收</a></li><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/19.html#性能" class="sidebar-link reco-side-性能" data-v-b57cc07c>性能</a></li><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/19.html#内存管理" class="sidebar-link reco-side-内存管理" data-v-b57cc07c>内存管理</a></li><li class="level-3" data-v-b57cc07c><a href="/blogs/blogs/19.html#_1-通过const和let声明提升性能" class="sidebar-link reco-side-_1-通过const和let声明提升性能" data-v-b57cc07c>1.通过const和let声明提升性能</a></li><li class="level-3" data-v-b57cc07c><a href="/blogs/blogs/19.html#_2-隐藏类和删除操作" class="sidebar-link reco-side-_2-隐藏类和删除操作" data-v-b57cc07c>2.隐藏类和删除操作</a></li><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/19.html#内存泄漏" class="sidebar-link reco-side-内存泄漏" data-v-b57cc07c>内存泄漏</a></li><li class="level-3" data-v-b57cc07c><a href="/blogs/blogs/19.html#未声明变量就使用" class="sidebar-link reco-side-未声明变量就使用" data-v-b57cc07c>未声明变量就使用</a></li><li class="level-3" data-v-b57cc07c><a href="/blogs/blogs/19.html#定时器形成了闭包" class="sidebar-link reco-side-定时器形成了闭包" data-v-b57cc07c>定时器形成了闭包</a></li><li class="level-3" data-v-b57cc07c><a href="/blogs/blogs/19.html#闭包泄露内存" class="sidebar-link reco-side-闭包泄露内存" data-v-b57cc07c>闭包泄露内存</a></li><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/19.html#静态分配和对象池" class="sidebar-link reco-side-静态分配和对象池" data-v-b57cc07c>静态分配和对象池</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/blogs/assets/js/app.0ff13cd8.js" defer></script><script src="/blogs/assets/js/3.25154597.js" defer></script><script src="/blogs/assets/js/1.2b2bc26d.js" defer></script><script src="/blogs/assets/js/21.faeae888.js" defer></script>
+  </body>
+</html>

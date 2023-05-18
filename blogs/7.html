@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>vue2源码之编译原理 | 星火的博客</title>
+    <meta name="generator" content="VuePress 1.9.8">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/blogs/assets/css/0.styles.64277ae4.css" as="style"><link rel="preload" href="/blogs/assets/js/app.0ff13cd8.js" as="script"><link rel="preload" href="/blogs/assets/js/3.25154597.js" as="script"><link rel="preload" href="/blogs/assets/js/1.2b2bc26d.js" as="script"><link rel="preload" href="/blogs/assets/js/29.067f8215.js" as="script"><link rel="prefetch" href="/blogs/assets/js/10.6a7508d8.js"><link rel="prefetch" href="/blogs/assets/js/11.0f3b060c.js"><link rel="prefetch" href="/blogs/assets/js/12.a18f01ff.js"><link rel="prefetch" href="/blogs/assets/js/13.88fe89aa.js"><link rel="prefetch" href="/blogs/assets/js/14.95141c56.js"><link rel="prefetch" href="/blogs/assets/js/15.3ec1a69e.js"><link rel="prefetch" href="/blogs/assets/js/16.bf10ba71.js"><link rel="prefetch" href="/blogs/assets/js/17.1b439980.js"><link rel="prefetch" href="/blogs/assets/js/18.b0291ccb.js"><link rel="prefetch" href="/blogs/assets/js/19.e5514aca.js"><link rel="prefetch" href="/blogs/assets/js/20.555574a0.js"><link rel="prefetch" href="/blogs/assets/js/21.faeae888.js"><link rel="prefetch" href="/blogs/assets/js/22.96e8a470.js"><link rel="prefetch" href="/blogs/assets/js/23.15dbab4e.js"><link rel="prefetch" href="/blogs/assets/js/24.11c4ca38.js"><link rel="prefetch" href="/blogs/assets/js/25.575d54f4.js"><link rel="prefetch" href="/blogs/assets/js/26.9b8768df.js"><link rel="prefetch" href="/blogs/assets/js/27.0824035f.js"><link rel="prefetch" href="/blogs/assets/js/28.bc1b44a4.js"><link rel="prefetch" href="/blogs/assets/js/30.b8c09885.js"><link rel="prefetch" href="/blogs/assets/js/31.6447086b.js"><link rel="prefetch" href="/blogs/assets/js/32.3acae25e.js"><link rel="prefetch" href="/blogs/assets/js/4.b2561910.js"><link rel="prefetch" href="/blogs/assets/js/5.953a0682.js"><link rel="prefetch" href="/blogs/assets/js/6.880c84a4.js"><link rel="prefetch" href="/blogs/assets/js/7.e3b042e0.js"><link rel="prefetch" href="/blogs/assets/js/8.34ee1e83.js"><link rel="prefetch" href="/blogs/assets/js/9.41f7eeed.js">
+    <link rel="stylesheet" href="/blogs/assets/css/0.styles.64277ae4.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>星火的博客</h3> <p class="description" data-v-59e6cb88>Just playing around</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>星火</span>
+          
+        <!---->
+        2023
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blogs/" class="home-link router-link-active"><img src="/blogs/doge.png" alt="星火的博客" class="logo"> <span class="site-name">星火的博客</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blogs/" class="nav-link"><i class="undefined"></i>
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      博客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blogs/categories/通用编程/" class="nav-link"><i class="undefined"></i>
+  通用编程
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/markdown/" class="nav-link"><i class="undefined"></i>
+  markdown
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/源码/" class="nav-link"><i class="undefined"></i>
+  源码
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/小程序/" class="nav-link"><i class="undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/js/" class="nav-link"><i class="undefined"></i>
+  js
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/读书/" class="nav-link"><i class="undefined"></i>
+  读书
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      星火 的博客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://baidu.com" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  百度
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://juejin.cn/user/233526039432445" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  掘金
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://github.com/Xusssyyy" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div><div class="nav-item"><a href="/blogs/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/blogs/doge.png" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    星火
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>21</h3> <h6 data-v-1fad0c41>Articles</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>23</h3> <h6 data-v-1fad0c41>Tags</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/blogs/" class="nav-link"><i class="undefined"></i>
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      博客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blogs/categories/通用编程/" class="nav-link"><i class="undefined"></i>
+  通用编程
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/markdown/" class="nav-link"><i class="undefined"></i>
+  markdown
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/源码/" class="nav-link"><i class="undefined"></i>
+  源码
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/小程序/" class="nav-link"><i class="undefined"></i>
+  小程序
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/js/" class="nav-link"><i class="undefined"></i>
+  js
+</a></li><li class="dropdown-item"><!----> <a href="/blogs/categories/读书/" class="nav-link"><i class="undefined"></i>
+  读书
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="undefined"></i>
+      星火 的博客
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://baidu.com" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  百度
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://juejin.cn/user/233526039432445" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  掘金
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://github.com/Xusssyyy" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div><div class="nav-item"><a href="/blogs/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>vue2源码之编译原理</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>星火</span>
+          
+        <!---->
+        2023
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">vue2源码之编译原理</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>星火</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>3/12/2023</span></i> <!----> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>文档</span><span class="tag-item" data-v-8a445198>源码</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="简介"><a href="#简介" class="header-anchor">#</a> 简介</h1> <p>经常有考到v-model双向绑定，虽然知道它是v-bind:value和v-on:input=&quot;value=$event.target.value&quot;&quot;的语法糖。但是为什么能实现这些指令还是不知道的，因为原生的html上并没有v-bind v-on这些指令，联想到之前学的vue会把模板编译为render函数然后render函数生成虚拟dom，所以应该是在模板编译这一步骤完成的指令的翻译，所以关注模板翻译就好。</p> <h2 id="模板翻译"><a href="#模板翻译" class="header-anchor">#</a> 模板翻译</h2> <p>模板翻译过程发生了什么呢？模板字符串通过正则和算法得到抽象语法树，然后抽象语法树通过字符串拼接得到render函数。</p> <h2 id="来源"><a href="#来源" class="header-anchor">#</a> 来源</h2> <p>点击render后发现render函数是通过compileToFuctions函数得来的，在调用compileToFuctions后生成了一堆很长的字符串，里面有包含s(msg)这种就是动态数据了，生成render的时候不会变成数据，但是当调用render生成虚拟dom的时候s(msg)就会被替换为数据。<br>
+在src/complier/index中找到以下代码:</p> <div class="language- extra-class"><pre class="language-text"><code>const ast = parse(template.trim(), options)
+if (options.optimize !== false) {
+    optimize(ast, options)
+}
+const code = generate(ast, options)
+return {
+    ast,
+    render: code.render,
+    staticRenderFns: code.staticRenderFns
+}
+</code></pre></div><p>说明parse函数会接收vue文件中的template模板并进行转换生成抽象语法树，然后通过generate函数接收抽象语法树生成render函数。最终返回抽象语法树和render函数(这里在最后返回了一个对象，所以在别的页面用到的时候可以直接解构赋值取出里面包含的内容，这点值得学习)</p> <h2 id="parse函数"><a href="#parse函数" class="header-anchor">#</a> parse函数</h2> <p>parse函数做了什么?parse函数很大，但parse函数包括三个函数和一个引入的parseHTML，warnonce函数主要功能是发出警告，closeELement函数主要功能是关闭标签，trimEndingWhitespace函数的主要功能是去除掉关闭标签之前的空格，parseHTML函数的选项传入了四个函数，分别是start、end、chars、comment。<br>
+start的作用是遇到开始标签时处理属性、指令，属性开始和结束的位置信息添加rawAttrsMap属性，处理v-for、v-if、v-once，如果类似与input还要做闭合处理。<br>
+end的作用是从stack栈中移除一个节点关闭处理，调用closeElement。<br>
+chars的作用是检验空root，处理文字，处理插值表达式，但是最终还是要调用parseText<br>
+comment的作用是处理注释。</p> <h2 id="parsehtml函数"><a href="#parsehtml函数" class="header-anchor">#</a> parseHTML函数</h2> <p>点进去parseHTML函数后发现多处用到前进函数advance</p> <div class="language- extra-class"><pre class="language-text"><code>function advance (n) {
+   index += n;
+   html = html.substring(n);
+}
+</code></pre></div><p>它的作用是截取模板字符串。</p> <h2 id="parsestarttag函数"><a href="#parsestarttag函数" class="header-anchor">#</a> parseStartTag函数</h2> <p>这个函数会匹配到&lt;然后会把节点的属性什么的都挂到match上</p> <h2 id="parseendtag函数"><a href="#parseendtag函数" class="header-anchor">#</a> parseEndTag函数</h2> <p>这个函数会匹配到&gt;之后会调用options.end()方法，本质上是执行end()方法从栈中移除一位，然后结束标签调用closeElment()方法。</p> <h2 id="handlestarttag函数"><a href="#handlestarttag函数" class="header-anchor">#</a> handleStartTag函数</h2> <p>这个函数会将匹配好的结果整理为属性数组attrs然后调用options.start方法</p> <h2 id="generate"><a href="#generate" class="header-anchor">#</a> generate</h2> <p>然后需要通过generate来放入ast然后生成render函数<br>
+实际上generate是调用了genElement,点进去看到genELment的判断顺序为el.once&gt;el.for&gt;el.if&gt;el.tag='templage'&gt;el.tag='slot',(这就是为什么尽量不要把v-for和v-if放在同一个元素里面的原因)。然后会走genData把id:root提取到attrs，然后走genChildren最后用code方法把他们拼接起来</p></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/7.html#模板翻译" class="sidebar-link reco-side-模板翻译" data-v-b57cc07c>模板翻译</a></li><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/7.html#来源" class="sidebar-link reco-side-来源" data-v-b57cc07c>来源</a></li><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/7.html#parse函数" class="sidebar-link reco-side-parse函数" data-v-b57cc07c>parse函数</a></li><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/7.html#parsehtml函数" class="sidebar-link reco-side-parsehtml函数" data-v-b57cc07c>parseHTML函数</a></li><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/7.html#parsestarttag函数" class="sidebar-link reco-side-parsestarttag函数" data-v-b57cc07c>parseStartTag函数</a></li><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/7.html#parseendtag函数" class="sidebar-link reco-side-parseendtag函数" data-v-b57cc07c>parseEndTag函数</a></li><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/7.html#handlestarttag函数" class="sidebar-link reco-side-handlestarttag函数" data-v-b57cc07c>handleStartTag函数</a></li><li class="level-2" data-v-b57cc07c><a href="/blogs/blogs/7.html#generate" class="sidebar-link reco-side-generate" data-v-b57cc07c>generate</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/blogs/assets/js/app.0ff13cd8.js" defer></script><script src="/blogs/assets/js/3.25154597.js" defer></script><script src="/blogs/assets/js/1.2b2bc26d.js" defer></script><script src="/blogs/assets/js/29.067f8215.js" defer></script>
+  </body>
+</html>
